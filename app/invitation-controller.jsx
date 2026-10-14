@@ -175,7 +175,9 @@ export default function InvitationController() {
     async function startIntro(userInitiated = false) {
       introFinished = false;
       window.clearTimeout(introTimer);
-      audio.pause();
+      // Preserve the element's native autoplay attempt on first load. Only a
+      // visitor-requested replay should stop and restart the soundtrack.
+      if (userInitiated) audio.pause();
       musicPausedByVisitor = false;
       window.clearInterval(musicTimer);
       window.clearTimeout(autoScrollResumeTimer);
