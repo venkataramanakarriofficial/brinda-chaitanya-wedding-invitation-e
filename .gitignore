@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.chrome-cdp-qa/
+npm-debug.log*
+
+/site-checkout/
+/site-checkout-fresh/
+/site-deploy-v3/
+*.tar.gz
+/node_modules/
+/.next/
