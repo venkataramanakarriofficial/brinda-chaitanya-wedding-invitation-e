@@ -1,22 +1,13 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import Script from 'next/script';
+import Invitation from './invitation';
+import InvitationController from './invitation-controller';
 
 export const dynamic = 'force-static';
 
-async function getInvitationMarkup() {
-  const source = await readFile(join(process.cwd(), 'index.html'), 'utf8');
-  const body = source.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  if (!body) throw new Error('Invitation markup was not found');
-  return body[1].replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
-}
-
-export default async function InvitationPage() {
-  const markup = await getInvitationMarkup();
+export default function InvitationPage() {
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: markup }} />
-      <Script src="/script.js?v=20261014-14" strategy="afterInteractive" />
+      <Invitation />
+      <InvitationController />
     </>
   );
 }
