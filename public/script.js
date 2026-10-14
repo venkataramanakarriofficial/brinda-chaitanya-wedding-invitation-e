@@ -18,7 +18,6 @@
   const video = $('intro-video');
   const site = $('site');
   const audio = $('wedding-audio');
-  const introMusicPrompt = $('intro-music-prompt');
   const musicControl = $('music-control');
   const musicLabel = $('music-label');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -39,7 +38,6 @@
     musicControl.setAttribute('aria-pressed', String(playing));
     musicControl.setAttribute('aria-label', playing ? 'Pause wedding music' : 'Play wedding music');
     musicLabel.textContent = playing ? 'Music playing' : 'Play music';
-    if (playing) introMusicPrompt.hidden = true;
   }
 
   function updateMusicWindow() {
@@ -90,7 +88,6 @@
       return true;
     } catch (_) {
       setMusicState(false);
-      if (!introFinished) introMusicPrompt.hidden = false;
       return false;
     }
   }
@@ -141,7 +138,6 @@
     introFinished = true;
     clearTimeout(introTimer);
     intro.classList.add('is-ending');
-    introMusicPrompt.hidden = true;
     site.removeAttribute('inert');
     document.body.classList.remove('intro-active');
     video.pause();
@@ -162,7 +158,6 @@
     autoScrollSpeed = null;
     setMusicState(false);
     intro.classList.remove('is-hidden', 'is-ending');
-    introMusicPrompt.hidden = true;
     site.setAttribute('inert', '');
     document.body.classList.add('intro-active');
     video.muted = true;
@@ -183,12 +178,7 @@
       finishIntro();
       return;
     }
-    if (!musicPlaying) {
-      video.pause();
-      video.currentTime = 0;
-      introMusicPrompt.hidden = false;
-      return;
-    }
+    if (!musicPlaying) setMusicState(false);
     introTimer = window.setTimeout(finishIntro, 10500);
   }
 
@@ -210,11 +200,6 @@
       clearInterval(fadeTimer);
       setMusicState(false);
     }
-  });
-
-  introMusicPrompt.addEventListener('click', event => {
-    event.stopPropagation();
-    startIntro(true);
   });
 
   $('replay-opening').addEventListener('click', () => {
