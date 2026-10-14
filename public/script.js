@@ -174,13 +174,19 @@
       return;
     }
     video.currentTime = 0;
-    const videoPlaying = await video.play().then(() => true).catch(() => false);
-    musicAttempt.then(musicPlaying => {
-      if (!musicPlaying) setMusicState(false);
-    });
+    const [videoPlaying, musicPlaying] = await Promise.all([
+      video.play().then(() => true).catch(() => false),
+      musicAttempt
+    ]);
     if (introFinished) return;
     if (!videoPlaying) {
       finishIntro();
+      return;
+    }
+    if (!musicPlaying) {
+      video.pause();
+      video.currentTime = 0;
+      introMusicPrompt.hidden = false;
       return;
     }
     introTimer = window.setTimeout(finishIntro, 10500);
@@ -208,7 +214,7 @@
 
   introMusicPrompt.addEventListener('click', event => {
     event.stopPropagation();
-    playWeddingMusic(false, true);
+    startIntro(true);
   });
 
   $('replay-opening').addEventListener('click', () => {
