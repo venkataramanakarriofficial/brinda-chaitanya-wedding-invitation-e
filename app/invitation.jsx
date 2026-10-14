@@ -7,6 +7,10 @@ export default function Invitation() {
         <video id="intro-video" autoPlay muted playsInline preload="auto" poster="/assets/hero-mandap-v2.png">
           <source src="/assets/opening-eight-seconds.mp4" type="video/mp4" />
         </video>
+        <button className="intro__enter" id="enter-invitation" type="button" hidden>
+          <span aria-hidden="true">♪</span>
+          Tap to begin
+        </button>
         <div className="intro__fade" aria-hidden="true" />
       </div>
 

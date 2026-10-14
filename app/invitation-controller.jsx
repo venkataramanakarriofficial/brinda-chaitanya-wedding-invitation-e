@@ -28,12 +28,13 @@ export default function InvitationController() {
     const audio = $('wedding-audio');
     const musicControl = $('music-control');
     const musicLabel = $('music-label');
+    const enterInvitation = $('enter-invitation');
     const skipLink = document.querySelector('.skip-link');
     const replayOpening = $('replay-opening');
     const saveDate = $('save-date');
     const shareInvitation = $('share-invitation');
 
-    if (!intro || !video || !site || !audio || !musicControl || !musicLabel || !skipLink || !replayOpening || !saveDate || !shareInvitation) {
+    if (!intro || !video || !site || !audio || !musicControl || !musicLabel || !enterInvitation || !skipLink || !replayOpening || !saveDate || !shareInvitation) {
       return undefined;
     }
 
@@ -58,6 +59,7 @@ export default function InvitationController() {
       musicControl.setAttribute('aria-pressed', String(playing));
       musicControl.setAttribute('aria-label', playing ? 'Pause wedding music' : 'Play wedding music');
       musicLabel.textContent = playing ? 'Music playing' : 'Play music';
+      if (playing) enterInvitation.hidden = true;
     }
 
     function updateMusicWindow() {
@@ -183,6 +185,7 @@ export default function InvitationController() {
       window.clearTimeout(autoScrollResumeTimer);
       autoScrollSpeed = null;
       setMusicState(false);
+      enterInvitation.hidden = true;
       intro.classList.remove('is-hidden', 'is-ending');
       site.setAttribute('inert', '');
       document.body.classList.add('intro-active');
@@ -209,7 +212,12 @@ export default function InvitationController() {
         finishIntro();
         return;
       }
-      if (!musicPlaying) setMusicState(false);
+      if (!musicPlaying) {
+        video.pause();
+        video.currentTime = 0;
+        enterInvitation.hidden = false;
+        return;
+      }
       introTimer = window.setTimeout(finishIntro, 10500);
     }
 
@@ -231,6 +239,11 @@ export default function InvitationController() {
         window.clearInterval(musicTimer);
         setMusicState(false);
       }
+    });
+
+    listen(enterInvitation, 'click', event => {
+      event.stopPropagation();
+      startIntro(true);
     });
 
     listen(replayOpening, 'click', () => {

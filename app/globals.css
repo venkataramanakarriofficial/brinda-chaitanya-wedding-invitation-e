@@ -27,6 +27,10 @@ svg { width: 1.2em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-
 /* Clean opening film. */
 .intro { position: fixed; inset: 0; z-index: 4000; display: grid; place-items: center; overflow: hidden; background: #0a1815; transition: opacity 1.15s ease, visibility 1.15s; }
 .intro video { width: 100%; height: 100%; display: block; object-fit: contain; background: #0a1815; }
+.intro__enter { position: absolute; z-index: 2; left: 50%; bottom: max(34px, env(safe-area-inset-bottom)); transform: translateX(-50%); border: 1px solid rgba(255, 236, 197, .72); border-radius: 999px; padding: 13px 20px; color: #fff4dc; background: rgba(6, 24, 19, .78); box-shadow: 0 8px 30px rgba(0, 0, 0, .3); backdrop-filter: blur(10px); font: 500 9px var(--caps); letter-spacing: .16em; animation: enterPrompt .35s ease both; }
+.intro__enter[hidden] { display: none; }
+.intro__enter span { margin-right: 7px; color: var(--gold-light); font-size: 15px; }
+@keyframes enterPrompt { from { opacity: 0; transform: translate(-50%, 8px); } }
 .intro__fade { position: absolute; inset: 0; pointer-events: none; background: #0a1815; opacity: 0; transition: opacity .95s ease; }
 .intro.is-ending .intro__fade { opacity: 1; }
 .intro.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
