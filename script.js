@@ -151,7 +151,7 @@
   async function startIntro(userInitiated = false) {
     introFinished = false;
     clearTimeout(introTimer);
-    if (userInitiated) audio.pause();
+    audio.pause();
     musicPausedByVisitor = false;
     clearInterval(fadeTimer);
     clearTimeout(autoScrollResumeTimer);
@@ -161,20 +161,22 @@
     site.setAttribute('inert', '');
     document.body.classList.add('intro-active');
     video.muted = true;
-    const musicAttempt = playWeddingMusic(true, userInitiated);
-    const videoReady = await waitForMetadata(video);
+    const mediaReady = await Promise.all([waitForMetadata(video), waitForMetadata(audio)]);
     if (introFinished) return;
-    if (!videoReady) {
+    if (!mediaReady.every(Boolean)) {
       finishIntro();
       return;
     }
     video.currentTime = 0;
+    updateMusicWindow();
+    audio.currentTime = musicStartSeconds;
     const [videoPlaying, musicPlaying] = await Promise.all([
       video.play().then(() => true).catch(() => false),
-      musicAttempt
+      playWeddingMusic(true, userInitiated)
     ]);
     if (introFinished) return;
     if (!videoPlaying) {
+      audio.pause();
       finishIntro();
       return;
     }
@@ -187,7 +189,6 @@
   });
   video.addEventListener('ended', finishIntro);
   video.addEventListener('error', finishIntro);
-  video.addEventListener('playing', () => startMusicAutomatically(false));
   document.querySelector('.skip-link').addEventListener('click', () => {
     playWeddingMusic(false, true);
     finishIntro();
@@ -229,10 +230,8 @@
       audio.currentTime = musicStartSeconds;
     }
   });
-  audio.addEventListener('canplay', () => startMusicAutomatically(false), { once: true });
-  window.addEventListener('load', () => startMusicAutomatically(false), { once: true });
   window.addEventListener('pageshow', () => {
-    startMusicAutomatically(false);
+    if (introFinished) startMusicAutomatically(false);
   });
   audio.addEventListener('play', () => setMusicState(true));
   audio.addEventListener('pause', () => setMusicState(false));
