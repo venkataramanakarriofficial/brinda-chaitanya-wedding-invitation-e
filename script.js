@@ -187,6 +187,7 @@
   });
   video.addEventListener('ended', finishIntro);
   video.addEventListener('error', finishIntro);
+  video.addEventListener('playing', () => startMusicAutomatically(false));
   document.querySelector('.skip-link').addEventListener('click', () => {
     playWeddingMusic(false, true);
     finishIntro();
@@ -228,8 +229,10 @@
       audio.currentTime = musicStartSeconds;
     }
   });
+  audio.addEventListener('canplay', () => startMusicAutomatically(false), { once: true });
+  window.addEventListener('load', () => startMusicAutomatically(false), { once: true });
   window.addEventListener('pageshow', () => {
-    if (introFinished) startMusicAutomatically(false);
+    startMusicAutomatically(false);
   });
   audio.addEventListener('play', () => setMusicState(true));
   audio.addEventListener('pause', () => setMusicState(false));
