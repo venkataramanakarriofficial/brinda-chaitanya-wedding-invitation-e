@@ -24,9 +24,13 @@ svg { width: 1.2em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-
 .skip-link { position: fixed; z-index: 5000; top: -80px; left: 18px; padding: 11px 16px; background: #fff; color: #111; transition: top .2s; }
 .skip-link:focus { top: 18px; }
 
-/* Clean opening film with no controls or prompts over the video. */
+/* Clean opening film; the music prompt appears only if audible autoplay is blocked. */
 .intro { position: fixed; inset: 0; z-index: 4000; display: grid; place-items: center; overflow: hidden; background: #0a1815; transition: opacity 1.15s ease, visibility 1.15s; }
 .intro video { width: 100%; height: 100%; display: block; object-fit: contain; background: #0a1815; }
+.intro__music-prompt { position: absolute; z-index: 2; left: 50%; bottom: max(28px, env(safe-area-inset-bottom)); transform: translateX(-50%); border: 1px solid rgba(255, 236, 197, .68); border-radius: 999px; padding: 11px 17px; color: #fff4dc; background: rgba(6, 24, 19, .72); box-shadow: 0 7px 28px rgba(0, 0, 0, .25); backdrop-filter: blur(9px); font: 500 9px var(--caps); letter-spacing: .14em; animation: promptIn .35s ease both; }
+.intro__music-prompt[hidden] { display: none; }
+.intro__music-prompt span { margin-right: 6px; color: var(--gold-light); font-size: 14px; }
+@keyframes promptIn { from { opacity: 0; transform: translate(-50%, 8px); } }
 .intro__fade { position: absolute; inset: 0; pointer-events: none; background: #0a1815; opacity: 0; transition: opacity .95s ease; }
 .intro.is-ending .intro__fade { opacity: 1; }
 .intro.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }

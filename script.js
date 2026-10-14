@@ -4,7 +4,8 @@
   const FILM_SECONDS = 8;
   const MUSIC_START_SECONDS = 14;
   const MUSIC_END_SECONDS = 230;
-  const AUTO_SCROLL_DURATION = 90000;
+  const AUTO_SCROLL_DURATION = 52000;
+  const AUTO_SCROLL_RESUME_DELAY = 900;
   const EVENT = {
     title: 'Wedding of Brinda Yellapu & Dr. Malla Venkata Satya Sai Chaitanya',
     start: '2026-11-15T22:14:00+05:30',
@@ -17,6 +18,7 @@
   const video = $('intro-video');
   const site = $('site');
   const audio = $('wedding-audio');
+  const introMusicPrompt = $('intro-music-prompt');
   const musicControl = $('music-control');
   const musicLabel = $('music-label');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -37,6 +39,7 @@
     musicControl.setAttribute('aria-pressed', String(playing));
     musicControl.setAttribute('aria-label', playing ? 'Pause wedding music' : 'Play wedding music');
     musicLabel.textContent = playing ? 'Music playing' : 'Play music';
+    if (playing) introMusicPrompt.hidden = true;
   }
 
   function updateMusicWindow() {
@@ -77,7 +80,7 @@
   async function playWeddingMusic(restart = false, userInitiated = false) {
     clearInterval(fadeTimer);
     if (userInitiated) musicPausedByVisitor = false;
-    if (!prepareMusicPosition(restart)) return false;
+    prepareMusicPosition(restart);
     audio.muted = false;
     audio.volume = 1;
     try {
@@ -87,6 +90,7 @@
       return true;
     } catch (_) {
       setMusicState(false);
+      if (!introFinished) introMusicPrompt.hidden = false;
       return false;
     }
   }
@@ -105,7 +109,7 @@
     stopAutoScroll();
     clearTimeout(autoScrollResumeTimer);
     if (!introFinished || reducedMotion) return;
-    autoScrollResumeTimer = window.setTimeout(startAutoScroll, 2500);
+    autoScrollResumeTimer = window.setTimeout(startAutoScroll, AUTO_SCROLL_RESUME_DELAY);
   }
 
   function startAutoScroll() {
@@ -122,10 +126,10 @@
       const elapsed = Math.min(64, now - previousTime);
       previousTime = now;
       const nextY = Math.min(pageEnd, window.scrollY + autoScrollSpeed * elapsed);
-      window.scrollTo(0, nextY);
+      window.scrollTo({ top: nextY, behavior: 'instant' });
       if (pageEnd - nextY > 1) autoScrollFrame = requestAnimationFrame(step);
       else {
-        window.scrollTo(0, pageEnd);
+        window.scrollTo({ top: pageEnd, behavior: 'instant' });
         autoScrolling = false;
       }
     }
@@ -137,49 +141,48 @@
     introFinished = true;
     clearTimeout(introTimer);
     intro.classList.add('is-ending');
+    introMusicPrompt.hidden = true;
     site.removeAttribute('inert');
     document.body.classList.remove('intro-active');
     video.pause();
     window.setTimeout(() => {
       intro.classList.add('is-hidden');
       startMusicAutomatically(false);
-      window.setTimeout(startAutoScroll, 1000);
+      window.setTimeout(startAutoScroll, 350);
     }, reducedMotion ? 20 : 900);
   }
 
   async function startIntro(userInitiated = false) {
     introFinished = false;
     clearTimeout(introTimer);
-    audio.pause();
+    if (userInitiated) audio.pause();
     musicPausedByVisitor = false;
     clearInterval(fadeTimer);
     clearTimeout(autoScrollResumeTimer);
     autoScrollSpeed = null;
     setMusicState(false);
     intro.classList.remove('is-hidden', 'is-ending');
+    introMusicPrompt.hidden = true;
     site.setAttribute('inert', '');
     document.body.classList.add('intro-active');
     video.muted = true;
-    const mediaReady = await Promise.all([waitForMetadata(video), waitForMetadata(audio)]);
+    const musicAttempt = playWeddingMusic(true, userInitiated);
+    const videoReady = await waitForMetadata(video);
     if (introFinished) return;
-    if (!mediaReady.every(Boolean)) {
+    if (!videoReady) {
       finishIntro();
       return;
     }
     video.currentTime = 0;
-    updateMusicWindow();
-    audio.currentTime = musicStartSeconds;
-    const [videoPlaying, musicPlaying] = await Promise.all([
-      video.play().then(() => true).catch(() => false),
-      playWeddingMusic(true, userInitiated)
-    ]);
+    const videoPlaying = await video.play().then(() => true).catch(() => false);
+    musicAttempt.then(musicPlaying => {
+      if (!musicPlaying) setMusicState(false);
+    });
     if (introFinished) return;
     if (!videoPlaying) {
-      audio.pause();
       finishIntro();
       return;
     }
-    if (!musicPlaying) setMusicState(false);
     introTimer = window.setTimeout(finishIntro, 10500);
   }
 
@@ -203,6 +206,11 @@
     }
   });
 
+  introMusicPrompt.addEventListener('click', event => {
+    event.stopPropagation();
+    playWeddingMusic(false, true);
+  });
+
   $('replay-opening').addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     startIntro(true);
@@ -214,9 +222,14 @@
       audio.currentTime = Math.min(musicEndSeconds - .25, musicStartSeconds + video.currentTime);
     }
     const playing = await playWeddingMusic(false, true);
-    if (playing) document.removeEventListener('pointerdown', unlockMusicFromGesture);
+    if (playing) {
+      document.removeEventListener('pointerdown', unlockMusicFromGesture);
+      document.removeEventListener('keydown', unlockMusicFromGesture);
+    }
   }
-  document.addEventListener('pointerdown', unlockMusicFromGesture);
+  ['pointerdown', 'keydown'].forEach(eventName => {
+    document.addEventListener(eventName, unlockMusicFromGesture);
+  });
 
   audio.addEventListener('loadedmetadata', () => {
     updateMusicWindow();

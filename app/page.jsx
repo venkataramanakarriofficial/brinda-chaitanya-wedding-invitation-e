@@ -16,7 +16,7 @@ export default async function InvitationPage() {
   return (
     <>
       <div dangerouslySetInnerHTML={{ __html: markup }} />
-      <Script src="/script.js?v=20261014-9" strategy="afterInteractive" />
+      <Script src="/script.js?v=20261014-10" strategy="afterInteractive" />
     </>
   );
 }
