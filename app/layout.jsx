@@ -1,14 +1,29 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Brinda & Chaitanya | A Wedding in Bloom',
-  description: 'With love and joy, Brinda Yellapu and Chaitanya invite you to celebrate their wedding on 15 November 2026, 10:14 PM, in Anakapalle.',
+  metadataBase: new URL('https://brinda-chaitanya-wedding-invitation.vercel.app'),
+  title: 'Brinda & Chaitanya | Wedding Invitation',
+  description: 'Join Brinda and Chaitanya as they celebrate their wedding on Sunday, 15 November 2026 at Pentakota Convention Hall, Anakapalle.',
+  alternates: { canonical: '/' },
   icons: { icon: '/assets/favicon.svg' },
   openGraph: {
     type: 'website',
-    title: 'Brinda & Chaitanya | A Wedding in Bloom',
+    url: '/',
+    siteName: 'Brinda & Chaitanya Wedding Invitation',
+    title: 'Brinda & Chaitanya | Wedding Invitation',
     description: 'Sunday, 15 November 2026 · 10:14 PM · Pentakota Convention Hall, Anakapalle',
-    images: [{ url: '/assets/floral-arch-watercolor.webp', width: 1240, height: 1748, alt: 'Floral watercolor wedding invitation' }]
+    images: [{
+      url: '/assets/brinda-chaitanya-wedding-preview.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Brinda and Chaitanya wedding invitation — 15 November 2026'
+    }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Brinda & Chaitanya | Wedding Invitation',
+    description: 'Sunday, 15 November 2026 · Pentakota Convention Hall, Anakapalle',
+    images: ['/assets/brinda-chaitanya-wedding-preview.jpg']
   }
 };
 
