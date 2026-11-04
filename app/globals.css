@@ -288,7 +288,7 @@ svg { width: 18px; height: 18px; flex: none; }
   .feature__words h2 { font-size: clamp(54px,12.5vw,72px); }
   .feature__words > p:not(.feature__signature) { font-size: 19px; }
   .event-card { padding: 45px 27px; grid-template-columns: 1fr; gap: 27px; text-align: center; }
-  .event-card__date strong { font-size: 176px; }
+  .event-card__date strong { margin: 12px 0 18px; font-size: clamp(115px, 35vw, 145px); line-height: .9; }
   .event-card__line { width: 75%; height: 1px; justify-self: center; }
   .event-card__info h3 { font-size: 46px; }
   .event-card__detail { justify-content: center; text-align: left; }
