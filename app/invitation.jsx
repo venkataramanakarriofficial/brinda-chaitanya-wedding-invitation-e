@@ -35,17 +35,11 @@ export default function Invitation() {
 
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">
-          <div className="hero__intro reveal">
-            <div className="eyebrow with-line"><span className="eyebrow__dot"/> TOGETHER WITH OUR FAMILIES</div>
-            <div className="hero__intro-text"><span className="hero__pretitle">A celebration of</span><h2>love <span>in</span><br/>full bloom<span className="hero__period">.</span></h2><p>Two souls, one beautiful promise. We warmly invite you to share in the joy of our wedding day.</p></div>
-            <div className="hero__intro-bottom"><div className="hero__date-note"><span>SUNDAY</span><strong>15.11.2026</strong><span>ANAKAPALLE · ANDHRA PRADESH</span></div><a href="#celebration" className="text-link">Explore the invitation <Icon name="arrow" /></a></div>
-          </div>
           <div className="hero__art reveal" aria-label="Floral watercolor wedding invitation for Brinda and Sai Chaitanya">
             <img src="/assets/floral-arch-watercolor.webp" alt="Hand painted ivory arch, blush pink roses, sage greenery and gold detailing" fetchPriority="high"/>
             <div className="hero__art-copy"><span className="hero__invite-label">JOYFULLY INVITE YOU TO CELEBRATE</span><h1 id="hero-title">Brinda<span className="hero__and">&</span><span>Sai Chaitanya</span></h1><Flourish/><p>Sunday, 15 November 2026</p><small>Auspicious Muhurtham · 10:14 PM</small></div>
             <span className="hero__art-corner">A DAY TO REMEMBER • A LOVE TO CELEBRATE</span>
           </div>
-          <a href="#couple" className="hero__scroll" aria-label="Scroll to our story"><span>SCROLL TO DISCOVER</span><Icon name="down"/></a>
         </section>
 
         <div className="ribbon" aria-hidden="true"><span>✦</span> AN UNFORGETTABLE BEGINNING <span>✦</span> CELEBRATING LOVE & FAMILY <span>✦</span> AN UNFORGETTABLE BEGINNING <span>✦</span></div>
@@ -62,7 +56,6 @@ export default function Invitation() {
 
         <section className="feature" aria-label="A moment of togetherness">
           <div className="feature__visual reveal"><img src="/assets/floral-mandap-watercolor.webp" alt="Watercolor floral arch leading to a beautifully decorated wedding mandap" loading="lazy"/><span className="feature__picture-label">A BEAUTIFUL BEGINNING</span></div>
-          <div className="feature__words reveal"><span className="section-number">A MOMENT TO TREASURE</span><span className="feature__quote">“</span><h2>Some moments<br/>are meant to be <em>shared.</em></h2><p>Amid the flowers, the laughter, and the blessings, there is one thing that will make this day even more special — celebrating it with you.</p><p className="feature__signature">With love, Brinda & Sai Chaitanya</p></div>
         </section>
 
         <section className="celebration section-shell" id="celebration" aria-labelledby="celebration-title">

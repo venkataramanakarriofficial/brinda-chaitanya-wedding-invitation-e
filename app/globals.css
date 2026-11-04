@@ -64,7 +64,7 @@ svg { width: 18px; height: 18px; flex: none; }
 @keyframes heartbeat { 50% { box-shadow: 0 0 0 6px rgba(203,141,154,.17); } }
 
 /* HERO - botanical stationery and hand-painted arch supplied with the request. */
-.hero { position: relative; max-width: 1600px; min-height: min(910px, calc(100svh - 82px)); padding: clamp(35px, 4.8vw, 68px) clamp(28px, 7.7vw, 125px) 62px; margin: auto; display: grid; grid-template-columns: minmax(0, .88fr) minmax(0, 1fr); align-items: center; gap: clamp(22px, 5vw, 85px); }
+.hero { position: relative; max-width: 1600px; min-height: min(910px, calc(100svh - 82px)); padding: clamp(35px, 4.8vw, 68px) clamp(28px, 7.7vw, 125px) 62px; margin: auto; display: grid; grid-template-columns: 1fr; align-items: center; gap: clamp(22px, 5vw, 85px); }
 .hero::before { content: ""; position: absolute; z-index: 0; top: 5%; left: -15%; width: 58%; aspect-ratio: 1; background: radial-gradient(circle, rgba(218,190,171,.17), transparent 68%); pointer-events: none; }
 .hero__intro { z-index: 1; display: flex; flex-direction: column; align-items: flex-start; max-width: 575px; }
 .eyebrow { font: 700 10px/1.6 var(--sans); letter-spacing: .22em; color: var(--gold); }
@@ -134,7 +134,7 @@ svg { width: 18px; height: 18px; flex: none; }
 .couple__formal { text-align: center; margin: 42px 0 0; color: #847970; font: 20px/1.4 var(--serif); }
 .couple__formal i { color: var(--rose); }
 
-.feature { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); background: #eeeae2; min-height: 670px; }
+.feature { display: grid; grid-template-columns: 1fr; background: #eeeae2; min-height: 670px; }
 .feature__visual { position: relative; min-height: 650px; overflow: hidden; }
 .feature__visual img { height: 100%; width: 100%; position: absolute; inset: 0; object-fit: cover; object-position: center 55%; }
 .feature__visual::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.6); pointer-events: none; }
