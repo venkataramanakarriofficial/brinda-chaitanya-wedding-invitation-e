@@ -1,0 +1,16 @@
+{
+  "name": "brinda-chaitanya-royal-invitation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node dev-launcher.mjs",
+    "dev:server": "next dev -p 3002",
+    "build": "next build",
+    "start": "next start -p 3002"
+  },
+  "dependencies": {
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  }
+}
