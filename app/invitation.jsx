@@ -20,7 +20,7 @@ export default function Invitation() {
       <div className="film__envelope-stage">
         <div className="film__envelope">
           <img className="film__envelope-image" src="/assets/minimalist-sage-ivory-envelope.png" alt="Sage and ivory wedding envelope with a gold wax seal"/>
-          <button type="button" className="film__open" id="film-open" aria-label="Open the wedding invitation">OPEN</button>
+          <button type="button" className="film__open" id="film-open" aria-label="Open the wedding invitation"/>
         </div>
       </div>
       <div className="film__video-stage">
