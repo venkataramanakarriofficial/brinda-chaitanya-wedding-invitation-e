@@ -29,9 +29,9 @@ svg { width: 18px; height: 18px; flex: none; }
 .skip-link:focus { top: 16px; }
 
 /* Opening: the full-screen envelope dissolves into the wedding film and invitation. */
-.film { position: fixed; z-index: 6000; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff9f8 44%, #f6e8e9 100%); transition: opacity 1.05s cubic-bezier(.22,.61,.36,1), visibility 1.05s ease; }
+.film { position: fixed; z-index: 6000; inset: 0; overflow: hidden; transform: none; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff9f8 44%, #f6e8e9 100%); transition: opacity 1.1s cubic-bezier(.22,.61,.36,1), transform 1.2s cubic-bezier(.22,.61,.36,1), visibility 1.1s ease; }
 .film[hidden] { display: none; }
-.film--closed { opacity: 0; visibility: hidden; pointer-events: none; }
+.film--closed { opacity: 0; visibility: hidden; transform: scale(1.018); pointer-events: none; }
 .film__envelope-stage, .film__video-stage { position: absolute; inset: 0; display: grid; place-items: center; }
 .film__envelope-stage { z-index: 2; padding: 0; transition: opacity .85s ease, transform 1.05s cubic-bezier(.22,.61,.36,1), filter .85s ease; }
 .film__envelope { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #f4f3e7; }
@@ -41,11 +41,10 @@ svg { width: 18px; height: 18px; flex: none; }
 .film__open:focus-visible { outline: none; }
 .film__video-stage { z-index: 1; opacity: 0; transform: scale(1.035); filter: blur(6px); background: #fff8f7; transition: opacity .9s ease, transform 1.15s cubic-bezier(.22,.61,.36,1), filter .9s ease; }
 .film__video-stage video { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center; }
-.film--opening .film__envelope-image { opacity: .48; transform: scale(1.06); filter: blur(3px); }
+.film--opening .film__envelope-image { opacity: .72; transform: scale(1.025); filter: blur(1.5px); }
 .film--opening .film__open { opacity: 0; }
-.film--playing .film__envelope-stage { opacity: 0; transform: scale(1.075); filter: blur(7px); pointer-events: none; }
-.film--playing .film__video-stage { z-index: 3; opacity: 1; transform: none; filter: none; }
-.film--closed .film__video-stage { opacity: 0; transform: scale(1.025); filter: blur(5px); }
+.film--playing .film__envelope-stage { opacity: 0; transform: scale(1.055); filter: blur(5px); pointer-events: none; }
+.film--playing .film__video-stage { opacity: 1; transform: none; filter: none; }
 @media (prefers-reduced-motion: reduce) {
   .film, .site, .film__envelope-image, .film__open, .film__envelope-stage, .film__video-stage { transition-duration: .01ms; }
 }

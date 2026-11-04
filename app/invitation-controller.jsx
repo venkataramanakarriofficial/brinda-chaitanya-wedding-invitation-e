@@ -76,7 +76,7 @@ export default function InvitationController() {
           if (window.scrollY >= maximum - 2) { stopAutoScroll(); return; }
           const elapsed = Math.min(64, now - lastAutoScrollTime);
           lastAutoScrollTime = now;
-          window.scrollBy(0, elapsed * 0.028);
+          window.scrollBy(0, elapsed * 0.04);
           autoScrollFrame = requestAnimationFrame(step);
         };
         autoScrollFrame = requestAnimationFrame(step);
@@ -117,17 +117,17 @@ export default function InvitationController() {
       const openButton = find('film-open');
       if (openButton) openButton.disabled = true;
       film.classList.add('film--opening');
-      openingTimer = window.setTimeout(() => {
+      video.currentTime = 0;
+      video.muted = false;
+      const revealVideo = () => {
         if (filmClosed) return;
-        film.classList.add('film--playing');
-        video.currentTime = 0;
-        video.muted = false;
-        const result = video.play();
-        result?.catch(() => {
-          video.muted = true;
-          video.play().catch(closeFilm);
-        });
-      }, reducedMotion ? 0 : 800);
+        openingTimer = window.setTimeout(() => film.classList.add('film--playing'), reducedMotion ? 0 : 80);
+      };
+      const result = video.play();
+      result?.then(revealVideo).catch(() => {
+        video.muted = true;
+        video.play().then(revealVideo).catch(closeFilm);
+      });
     };
 
     listen(find('film-open'), 'click', playFilm);
