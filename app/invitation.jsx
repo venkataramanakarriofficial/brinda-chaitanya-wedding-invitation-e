@@ -21,23 +21,23 @@ export default function Invitation() {
     <div className="film" id="film" role="dialog" aria-modal="true" aria-label="Wedding invitation opening film">
       <div className="film__top"><span className="film__eyebrow">AN INVITATION FROM OUR HEARTS</span><button type="button" className="film__skip" id="film-skip">Skip intro <Icon name="arrow" /></button></div>
       <div className="film__portrait"><video id="film-video" autoPlay muted playsInline preload="metadata" poster="/assets/floral-mandap-watercolor.webp"><source src="/assets/floral-opening-film.mp4" type="video/mp4" /></video><span className="film__edge"/></div>
-      <div className="film__bottom"><span>BRINDA <i>&</i> SAI CHAITANYA</span><div className="film__progress"><span id="film-progress"/></div><button type="button" className="film__enter" id="film-enter">Enter invitation <Icon name="arrow"/></button></div>
+      <div className="film__bottom"><span>BRINDA <i>&</i> CHAITANYA</span><div className="film__progress"><span id="film-progress"/></div><button type="button" className="film__enter" id="film-enter">Enter invitation <Icon name="arrow"/></button></div>
     </div>
 
     <audio id="wedding-audio" preload="none" loop><source src="/assets/jashn-e-bahaaraa-flute.mp3" type="audio/mpeg" /></audio>
 
     <div className="site" id="site">
       <header className="site-header">
-        <a className="brand" href="#home" aria-label="Brinda and Sai Chaitanya, top of page"><span className="brand__monogram">B<span>&</span>C</span><span className="brand__small">THE WEDDING</span></a>
+        <a className="brand" href="#home" aria-label="Brinda and Chaitanya, top of page"><span className="brand__monogram">B<span>&</span>C</span><span className="brand__small">THE WEDDING</span></a>
         <nav className="site-header__nav" aria-label="Main navigation"><a href="#couple">Our story</a><a href="#celebration">The celebration</a><a href="#venue">The venue</a></nav>
         <button className="audio-button" type="button" id="music-control" aria-pressed="false" aria-label="Play wedding music"><Icon name="sound"/><span id="music-label">Music off</span><span className="audio-button__dot"/></button>
       </header>
 
       <main>
         <section className="hero" id="home" aria-labelledby="hero-title">
-          <div className="hero__art reveal" aria-label="Floral watercolor wedding invitation for Brinda and Sai Chaitanya">
+          <div className="hero__art reveal" aria-label="Floral watercolor wedding invitation for Brinda and Chaitanya">
             <img src="/assets/floral-arch-watercolor.webp" alt="Hand painted ivory arch, blush pink roses, sage greenery and gold detailing" fetchPriority="high"/>
-            <div className="hero__art-copy"><span className="hero__invite-label">JOYFULLY INVITE YOU TO CELEBRATE</span><h1 id="hero-title">Brinda<span className="hero__and">&</span><span>Sai Chaitanya</span></h1><Flourish/><p>Sunday, 15 November 2026</p><small>Auspicious Muhurtham · 10:14 PM</small></div>
+            <div className="hero__art-copy"><span className="hero__invite-label">JOYFULLY INVITE YOU TO CELEBRATE</span><h1 id="hero-title">Brinda<span className="hero__and">&</span><span>Chaitanya</span></h1><Flourish/><p>Sunday, 15 November 2026</p><small>Auspicious Muhurtham · 10:14 PM</small></div>
             <span className="hero__art-corner">A DAY TO REMEMBER • A LOVE TO CELEBRATE</span>
           </div>
         </section>
@@ -49,9 +49,9 @@ export default function Invitation() {
           <div className="couple__cards">
             <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE BRIDE</p><h3>Brinda <span>Yellapu</span></h3><p className="person-card__degree">BHMS</p><span className="person-card__divider"/><p className="person-card__relationship">Loving daughter of</p><p className="person-card__parents">Yellapu Devendra Kumar <i>&</i><br/>Priya Darshini</p></article>
             <div className="couple__between reveal"><span className="couple__rule"/><b>&</b><span className="couple__rule"/></div>
-            <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE GROOM</p><h3>Sai Chaitanya</h3><p className="person-card__degree">MBBS, MD</p><span className="person-card__divider"/><p className="person-card__relationship">Loving son of</p><p className="person-card__parents">Malla Murali <i>&</i><br/>Sujatha</p></article>
+            <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE GROOM</p><h3>Chaitanya</h3><p className="person-card__degree">MBBS, MD</p><span className="person-card__divider"/><p className="person-card__relationship">Loving son of</p><p className="person-card__parents">Malla Murali <i>&</i><br/>Sujatha</p></article>
           </div>
-          <p className="couple__formal reveal">Brinda Yellapu <i>&</i> Dr. Malla Venkata Satya Sai Chaitanya</p>
+          <p className="couple__formal reveal">Brinda Yellapu <i>&</i> Chaitanya</p>
         </section>
 
         <section className="feature" aria-label="A moment of togetherness">
@@ -66,7 +66,7 @@ export default function Invitation() {
 
         <section className="venue" id="venue" aria-labelledby="venue-title"><div className="venue__image" aria-hidden="true"><img src="/assets/floral-arch-watercolor.webp" alt="" loading="lazy"/></div><div className="venue__card reveal"><span className="section-number">03 / WHERE LOVE GATHERS</span><p className="handwritten">Find your way to us</p><h2 id="venue-title">The wedding<br/><em>venue.</em></h2><Flourish/><h3>Pentakota<br/>Convention Hall</h3><p>Near Ring Road<br/>Anakapalle, Andhra Pradesh</p><a className="button button--sage" href="https://www.google.com/maps/search/?api=1&query=Pentakota%20Convention%20Hall%20Near%20Ring%20Road%20Anakapalle" data-map-link target="_blank" rel="noopener noreferrer"><Icon name="pin"/> Get directions</a><span className="venue__footnote">Your presence is the greatest gift.</span></div></section>
 
-        <section className="ending section-shell" aria-labelledby="ending-title"><div className="ending__inner reveal"><span className="ending__flower" aria-hidden="true">❀</span><span className="section-number">WITH GRATEFUL HEARTS</span><h2 id="ending-title">Our story begins with love.<br/><em>It becomes unforgettable with you.</em></h2><p>Please join us for a beautiful celebration of joy, togetherness, and a lifetime of memories.</p><p className="ending__names">Brinda <i>&</i> Sai Chaitanya</p><p className="ending__date">15 • 11 • 2026 — ANAKAPALLE</p><button type="button" className="button button--outline" id="share-invitation"><Icon name="share"/> Share this invitation</button></div></section>
+        <section className="ending section-shell" aria-labelledby="ending-title"><div className="ending__inner reveal"><span className="ending__flower" aria-hidden="true">❀</span><span className="section-number">WITH GRATEFUL HEARTS</span><h2 id="ending-title">Our story begins with love.<br/><em>It becomes unforgettable with you.</em></h2><p>Please join us for a beautiful celebration of joy, togetherness, and a lifetime of memories.</p><p className="ending__names">Brinda <i>&</i> Chaitanya</p><p className="ending__date">15 • 11 • 2026 — ANAKAPALLE</p><button type="button" className="button button--outline" id="share-invitation"><Icon name="share"/> Share this invitation</button></div></section>
       </main>
       <footer className="footer"><span className="footer__brand">B <i>&</i> C</span><span>MADE WITH LOVE FOR OUR BEAUTIFUL DAY</span><button type="button" id="replay-opening"><Icon name="replay"/> Replay opening</button></footer>
     </div>

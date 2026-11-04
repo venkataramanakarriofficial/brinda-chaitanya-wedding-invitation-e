@@ -1,4 +1,4 @@
-# Brinda & Sai Chaitanya — A Wedding in Bloom
+# Brinda & Chaitanya — A Wedding in Bloom
 
 A premium, mobile-friendly Next.js floral wedding invitation, rebuilt using the two supplied watercolor designs and the supplied 15-second reference video.
 
@@ -26,7 +26,7 @@ The supplied reference movie includes **6:00 PM** text at its ending, but the or
 ## Wedding content
 
 - Bride: **Brinda Yellapu**, BHMS; parents: Yellapu Devendra Kumar and Priya Darshini.
-- Groom: **Dr. Malla Venkata Satya Sai Chaitanya**, MBBS, MD; parents: Malla Murali and Sujatha.
+- Groom: **Chaitanya**, MBBS, MD; parents: Malla Murali and Sujatha.
 - Wedding: **Sunday, 15 November 2026, 10:14 PM IST**.
 - Venue: **Pentakota Convention Hall, Near Ring Road, Anakapalle, Andhra Pradesh**.
 

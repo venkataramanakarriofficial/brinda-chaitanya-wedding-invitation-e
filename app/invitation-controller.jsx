@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 
 const EVENT = {
   start: '2026-11-15T22:14:00+05:30',
-  title: 'Wedding of Brinda Yellapu & Dr. Malla Venkata Satya Sai Chaitanya',
+  title: 'Wedding of Brinda Yellapu & Chaitanya',
   location: 'Pentakota Convention Hall, Near Ring Road, Anakapalle, Andhra Pradesh',
-  description: 'You are invited to celebrate with Brinda and Sai Chaitanya. Wedding muhurtham at 10:14 PM IST.'
+  description: 'You are invited to celebrate with Brinda and Chaitanya. Wedding muhurtham at 10:14 PM IST.'
 };
 
 export default function InvitationController() {
@@ -121,14 +121,14 @@ export default function InvitationController() {
       const start = new Date(EVENT.start);
       const end = new Date(start.getTime() + 60 * 60 * 1000);
       const contents = [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Wedding of Brinda and Sai Chaitanya//EN', 'CALSCALE:GREGORIAN',
-        'BEGIN:VEVENT', 'UID:brinda-sai-chaitanya-wedding-20261115@invitation', `DTSTAMP:${icsDate(new Date())}`, `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Wedding of Brinda and Chaitanya//EN', 'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT', 'UID:brinda-chaitanya-wedding-20261115@invitation', `DTSTAMP:${icsDate(new Date())}`, `DTSTART:${icsDate(start)}`, `DTEND:${icsDate(end)}`,
         `SUMMARY:${escapeIcs(EVENT.title)}`, `LOCATION:${escapeIcs(EVENT.location)}`, `DESCRIPTION:${escapeIcs(EVENT.description)}`, 'END:VEVENT', 'END:VCALENDAR'
       ].join('\r\n');
       const url = URL.createObjectURL(new Blob([contents], { type: 'text/calendar;charset=utf-8' }));
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'Brinda-and-Sai-Chaitanya-Wedding.ics';
+      link.download = 'Brinda-and-Chaitanya-Wedding.ics';
       document.body.appendChild(link);
       link.click(); link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -136,7 +136,7 @@ export default function InvitationController() {
     });
 
     listen(find('share-invitation'), 'click', async () => {
-      const data = { title: 'Brinda & Sai Chaitanya — Wedding Invitation', text: 'Please celebrate our wedding on Sunday, 15 November 2026 at 10:14 PM in Anakapalle.', url: window.location.href.split('#')[0] };
+      const data = { title: 'Brinda & Chaitanya — Wedding Invitation', text: 'Please celebrate our wedding on Sunday, 15 November 2026 at 10:14 PM in Anakapalle.', url: window.location.href.split('#')[0] };
       try {
         if (navigator.share) await navigator.share(data);
         else if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(`${data.text}\n${data.url}`); toast('Invitation link copied!'); }

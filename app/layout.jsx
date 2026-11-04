@@ -1,12 +1,12 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Brinda & Sai Chaitanya | A Wedding in Bloom',
-  description: 'With love and joy, Brinda Yellapu and Dr. Malla Venkata Satya Sai Chaitanya invite you to celebrate their wedding on 15 November 2026, 10:14 PM, in Anakapalle.',
+  title: 'Brinda & Chaitanya | A Wedding in Bloom',
+  description: 'With love and joy, Brinda Yellapu and Chaitanya invite you to celebrate their wedding on 15 November 2026, 10:14 PM, in Anakapalle.',
   icons: { icon: '/assets/favicon.svg' },
   openGraph: {
     type: 'website',
-    title: 'Brinda & Sai Chaitanya | A Wedding in Bloom',
+    title: 'Brinda & Chaitanya | A Wedding in Bloom',
     description: 'Sunday, 15 November 2026 · 10:14 PM · Pentakota Convention Hall, Anakapalle',
     images: [{ url: '/assets/floral-arch-watercolor.webp', width: 1240, height: 1748, alt: 'Floral watercolor wedding invitation' }]
   }
