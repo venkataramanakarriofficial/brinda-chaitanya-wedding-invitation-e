@@ -27,6 +27,10 @@ export default function InvitationController() {
     let toastTimer;
     let countdownTimer;
     let filmHideTimer;
+    let autoScrollTimer;
+    let autoScrollFrame;
+    let autoScrollActive = false;
+    let lastAutoScrollTime = 0;
     let observer;
 
     const toast = message => {
@@ -51,6 +55,34 @@ export default function InvitationController() {
     listen(audio, 'pause', setMusic);
     listen(audio, 'error', () => { setMusic(); toast('Music is unavailable on this device.'); });
 
+    const stopAutoScroll = () => {
+      autoScrollActive = false;
+      clearTimeout(autoScrollTimer);
+      cancelAnimationFrame(autoScrollFrame);
+      document.body.classList.remove('auto-scrolling');
+    };
+
+    const startAutoScroll = () => {
+      if (reducedMotion) return;
+      stopAutoScroll();
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      autoScrollTimer = window.setTimeout(() => {
+        autoScrollActive = true;
+        document.body.classList.add('auto-scrolling');
+        lastAutoScrollTime = performance.now();
+        const step = now => {
+          if (!autoScrollActive) return;
+          const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          if (window.scrollY >= maximum - 2) { stopAutoScroll(); return; }
+          const elapsed = Math.min(64, now - lastAutoScrollTime);
+          lastAutoScrollTime = now;
+          window.scrollBy(0, elapsed * 0.028);
+          autoScrollFrame = requestAnimationFrame(step);
+        };
+        autoScrollFrame = requestAnimationFrame(step);
+      }, 650);
+    };
+
     const closeFilm = () => {
       if (filmClosed) return;
       filmClosed = true;
@@ -59,10 +91,14 @@ export default function InvitationController() {
       film.classList.add('film--closed');
       film.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('film-active');
-      filmHideTimer = window.setTimeout(() => { film.hidden = true; }, 780);
+      filmHideTimer = window.setTimeout(() => {
+        film.hidden = true;
+        startAutoScroll();
+      }, 1050);
     };
 
     const openFilm = () => {
+      stopAutoScroll();
       clearTimeout(openingTimer);
       clearTimeout(filmHideTimer);
       filmClosed = false;
@@ -91,14 +127,20 @@ export default function InvitationController() {
           video.muted = true;
           video.play().catch(closeFilm);
         });
-      }, reducedMotion ? 0 : 1150);
+      }, reducedMotion ? 0 : 800);
     };
 
     listen(find('film-open'), 'click', playFilm);
     listen(find('replay-opening'), 'click', () => { window.scrollTo({ top: 0, behavior: 'instant' }); openFilm(); });
     listen(video, 'ended', closeFilm);
     listen(video, 'error', closeFilm);
-    listen(document, 'keydown', event => { if (event.key === 'Escape' && !filmClosed) closeFilm(); });
+    ['wheel', 'touchstart', 'pointerdown'].forEach(type => listen(document, type, () => {
+      if (autoScrollActive || autoScrollTimer) stopAutoScroll();
+    }, { passive: true }));
+    listen(document, 'keydown', event => {
+      if (event.key === 'Escape' && !filmClosed) closeFilm();
+      else if (autoScrollActive || autoScrollTimer) stopAutoScroll();
+    });
 
     // Never make the soundtrack a prerequisite for entering the invitation.
     // Mobile browsers normally require a user gesture to start audio.
@@ -156,8 +198,10 @@ export default function InvitationController() {
       controller.abort();
       clearTimeout(openingTimer);
       clearTimeout(filmHideTimer);
+      clearTimeout(autoScrollTimer);
       clearTimeout(toastTimer);
       clearInterval(countdownTimer);
+      cancelAnimationFrame(autoScrollFrame);
       observer?.disconnect();
       video.pause(); audio.pause();
     };

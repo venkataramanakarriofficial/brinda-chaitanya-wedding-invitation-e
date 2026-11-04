@@ -28,28 +28,30 @@ svg { width: 18px; height: 18px; flex: none; }
 .skip-link { position: fixed; top: -100px; left: 18px; background: white; border-radius: 3px; padding: 12px 18px; z-index: 6001; font-size: 12px; }
 .skip-link:focus { top: 16px; }
 
-/* Opening: a blush embossed envelope reveals the full-screen wedding film. */
-.film { position: fixed; z-index: 6000; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff9f8 44%, #f6e8e9 100%); transition: opacity .75s ease, visibility .75s ease; }
+/* Opening: the full-screen envelope dissolves into the wedding film and invitation. */
+.film { position: fixed; z-index: 6000; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff9f8 44%, #f6e8e9 100%); transition: opacity 1.05s cubic-bezier(.22,.61,.36,1), visibility 1.05s ease; }
 .film[hidden] { display: none; }
 .film--closed { opacity: 0; visibility: hidden; pointer-events: none; }
 .film__envelope-stage, .film__video-stage { position: absolute; inset: 0; display: grid; place-items: center; }
-.film__envelope-stage { z-index: 2; padding: 0; transition: opacity .45s ease, transform .65s ease; }
+.film__envelope-stage { z-index: 2; padding: 0; transition: opacity .85s ease, transform 1.05s cubic-bezier(.22,.61,.36,1), filter .85s ease; }
 .film__envelope { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; background: #f4f3e7; }
-.film__envelope-image { width: 100%; height: 100%; object-fit: cover; transition: opacity .75s ease, transform 1.05s cubic-bezier(.22,.76,.25,1); }
+.film__envelope-image { width: 100%; height: 100%; object-fit: cover; transition: opacity .9s ease, transform 1.15s cubic-bezier(.22,.76,.25,1), filter .9s ease; }
 .film__open { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 0; padding: 0; background: transparent; transition: opacity .3s ease; }
 .film__open:disabled { cursor: default; }
 .film__open:focus-visible { outline: none; }
-.film__video-stage { z-index: 1; opacity: 0; background: #fff8f7; transition: opacity .45s ease; }
+.film__video-stage { z-index: 1; opacity: 0; transform: scale(1.035); filter: blur(6px); background: #fff8f7; transition: opacity .9s ease, transform 1.15s cubic-bezier(.22,.61,.36,1), filter .9s ease; }
 .film__video-stage video { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center; }
-.film--opening .film__envelope-image { opacity: 0; transform: scale(1.045); }
+.film--opening .film__envelope-image { opacity: .48; transform: scale(1.06); filter: blur(3px); }
 .film--opening .film__open { opacity: 0; }
-.film--playing .film__envelope-stage { opacity: 0; transform: scale(1.04); pointer-events: none; }
-.film--playing .film__video-stage { z-index: 3; opacity: 1; }
+.film--playing .film__envelope-stage { opacity: 0; transform: scale(1.075); filter: blur(7px); pointer-events: none; }
+.film--playing .film__video-stage { z-index: 3; opacity: 1; transform: none; filter: none; }
+.film--closed .film__video-stage { opacity: 0; transform: scale(1.025); filter: blur(5px); }
 @media (prefers-reduced-motion: reduce) {
-  .film__envelope-image, .film__open, .film__envelope-stage, .film__video-stage { transition-duration: .01ms; }
+  .film, .site, .film__envelope-image, .film__open, .film__envelope-stage, .film__video-stage { transition-duration: .01ms; }
 }
 
-.site { background: var(--paper); }
+.site { background: var(--paper); transform: none; filter: none; transition: transform 1.15s cubic-bezier(.22,.61,.36,1), filter 1s ease; }
+body.film-active .site { transform: scale(.992); filter: blur(7px); }
 .site-header { position: relative; z-index: 100; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 82px; padding: 0 clamp(24px, 5.8vw, 100px); background: rgba(250, 247, 242, .96); border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 15px; width: max-content; }
 .brand__monogram { font: 500 34px/1 var(--serif); letter-spacing: -.08em; color: var(--pine); }
