@@ -189,7 +189,7 @@ svg { width: 18px; height: 18px; flex: none; }
 .ending__inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
 .ending__flower { display: block; font-size: 40px; color: var(--rose); margin-bottom: 25px; }
 .ending h2 { margin: 25px 0 24px; font: 500 clamp(32px,4vw,52px)/1.02 var(--serif); letter-spacing: -.05em; }
-.ending h2 > span, .ending h2 em { display: block; white-space: nowrap; transform-origin: center; }
+.ending h2 > span, .ending h2 em { display: block; white-space: nowrap; }
 .ending h2 em { font-weight: 400; color: #83957b; }
 .ending__inner > p:not(.ending__names):not(.ending__date) { max-width: 510px; margin: 0 auto 23px; color: #858375; font: 20px/1.5 var(--serif); }
 .ending__names { margin: 27px 0 8px; font: 41px/1.25 var(--script); color: #a77c86; }
@@ -300,9 +300,8 @@ svg { width: 18px; height: 18px; flex: none; }
   .venue__image { min-height: 440px; }
   .venue__card { padding: 50px 23px; }
   .venue__card h2 { font-size: 65px; }
-  .ending h2 { font-size: clamp(32px, 10vw, 40px); line-height: .98; }
-  .ending h2 > span { transform: scaleX(.74); }
-  .ending h2 em { transform: scaleX(.64); }
+  .ending h2 { margin: 25px -18px 26px; font-size: clamp(30px, 8.5vw, 34px); line-height: 1.08; letter-spacing: -.075em; }
+  .ending h2 em { margin-top: 3px; }
   .ending__names { font-size: 36px; }
   .footer { flex-wrap: wrap; padding: 30px 23px; gap: 19px; }
   .footer > span:nth-child(2) { display: none; }
