@@ -84,7 +84,7 @@ export default function InvitationController() {
           if (window.scrollY >= maximum - 2) { stopAutoScroll(); return; }
           const elapsed = Math.min(64, now - lastAutoScrollTime);
           lastAutoScrollTime = now;
-          autoScrollPosition = Math.min(maximum, autoScrollPosition + elapsed * 0.04);
+          autoScrollPosition = Math.min(maximum, autoScrollPosition + elapsed * 0.048);
           window.scrollTo(0, autoScrollPosition);
           autoScrollFrame = requestAnimationFrame(step);
         };
