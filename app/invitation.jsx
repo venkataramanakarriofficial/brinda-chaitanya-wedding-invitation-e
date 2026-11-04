@@ -18,14 +18,24 @@ export default function Invitation() {
   return <>
     <div className="film" id="film" role="dialog" aria-modal="true" aria-label="Wedding invitation opening film">
       <div className="film__envelope-stage">
-        <button type="button" className="film__open" id="film-open" aria-label="Open the wedding invitation">
-          <span className="film__envelope" aria-hidden="true">
-            <span className="film__envelope-card"><span>B <i>&</i> C</span><small>WEDDING INVITATION</small></span>
-            <span className="film__envelope-flap"/>
-            <span className="film__envelope-pocket"/>
-            <span className="film__open-label">OPEN</span>
-          </span>
-        </button>
+        <div className="film__envelope">
+          <span className="film__envelope-card" aria-hidden="true"><span>B <i>&</i> C</span><small>WEDDING INVITATION</small></span>
+          <span className="film__envelope-flap" aria-hidden="true"/>
+          <span className="film__envelope-pocket" aria-hidden="true"/>
+          <svg className="film__envelope-botanical" viewBox="0 0 320 500" aria-hidden="true">
+            <g>
+              <path d="M0 174C35 151 48 118 59 67M8 157l29-3M25 137l-3-27M41 112l27-16M51 88L38 66"/>
+              <path d="M320 164c-34-20-49-54-60-102m52 85-28-4m10-24 5-27m-20 4-26-18m15-1 13-22"/>
+              <path d="M0 356c34 16 56 52 67 114m-55-99 30 2m-17 20-2 30m24-7 27 18m-17 3-13 27"/>
+              <path d="M320 344c-36 22-53 58-62 121m50-100-29 4m15 18 1 30m-21-3-28 17m17 5 12 27"/>
+              <g transform="translate(53 91)"><ellipse rx="12" ry="28"/><ellipse rx="12" ry="28" transform="rotate(72)"/><ellipse rx="12" ry="28" transform="rotate(144)"/><ellipse rx="12" ry="28" transform="rotate(216)"/><ellipse rx="12" ry="28" transform="rotate(288)"/><circle r="8"/></g>
+              <g transform="translate(267 88) scale(.82)"><ellipse rx="12" ry="28"/><ellipse rx="12" ry="28" transform="rotate(72)"/><ellipse rx="12" ry="28" transform="rotate(144)"/><ellipse rx="12" ry="28" transform="rotate(216)"/><ellipse rx="12" ry="28" transform="rotate(288)"/><circle r="8"/></g>
+              <g transform="translate(56 411) scale(.9)"><ellipse rx="12" ry="28"/><ellipse rx="12" ry="28" transform="rotate(72)"/><ellipse rx="12" ry="28" transform="rotate(144)"/><ellipse rx="12" ry="28" transform="rotate(216)"/><ellipse rx="12" ry="28" transform="rotate(288)"/><circle r="8"/></g>
+              <g transform="translate(266 395)"><ellipse rx="12" ry="28"/><ellipse rx="12" ry="28" transform="rotate(72)"/><ellipse rx="12" ry="28" transform="rotate(144)"/><ellipse rx="12" ry="28" transform="rotate(216)"/><ellipse rx="12" ry="28" transform="rotate(288)"/><circle r="8"/></g>
+            </g>
+          </svg>
+          <button type="button" className="film__open" id="film-open" aria-label="Open the wedding invitation">OPEN</button>
+        </div>
       </div>
       <div className="film__video-stage">
         <video id="film-video" playsInline preload="auto" poster="/assets/floral-mandap-watercolor.webp" aria-label="Brinda and Chaitanya wedding opening film"><source src="/assets/floral-opening-film.mp4" type="video/mp4" /></video>
