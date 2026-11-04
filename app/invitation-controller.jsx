@@ -74,7 +74,6 @@ export default function InvitationController() {
       if (openButton) openButton.disabled = false;
       video.currentTime = 0;
       video.load();
-      requestAnimationFrame(() => openButton?.focus({ preventScroll: true }));
     };
 
     const playFilm = () => {
