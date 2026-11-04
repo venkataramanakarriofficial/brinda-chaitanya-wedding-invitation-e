@@ -28,7 +28,7 @@ export default function Invitation() {
       </div>
     </div>
 
-    <audio id="wedding-audio" preload="auto"><source src="/assets/ye-maya-chesave-manasaa-theme.mp3" type="audio/mpeg" /></audio>
+    <audio id="wedding-audio" preload="auto" loop><source src="/assets/yemaaya-chesave-manasaa-full.mp3" type="audio/mpeg" /></audio>
 
     <div className="site" id="site">
       <header className="site-header">
