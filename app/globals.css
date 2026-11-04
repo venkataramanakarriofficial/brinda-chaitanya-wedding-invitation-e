@@ -89,7 +89,7 @@ svg { width: 18px; height: 18px; flex: none; }
 .hero__art-copy { position: absolute; z-index: 2; left: 9%; right: 9%; top: 33%; text-align: center; color: var(--pine-deep); }
 .hero__invite-label { font-size: clamp(7px,.72vw,10px); letter-spacing: .20em; font-weight: 600; color: #8c8062; }
 .hero__art-copy h1 { margin: clamp(13px,2vw,23px) 0 clamp(5px,1vw,14px); font: 500 clamp(37px, 4.4vw, 69px)/.90 var(--serif); letter-spacing: -.05em; }
-.hero__art-copy h1 > span:last-child { display: block; white-space: nowrap; font-size: .76em; letter-spacing: -.048em; }
+.hero__art-copy h1 > span:not(.hero__and) { display: block; white-space: nowrap; font: inherit; letter-spacing: inherit; }
 .hero__art-copy .hero__and { display: block; margin: 1px 0 6px; font: 400 .68em/.95 var(--script); color: #ae8959; }
 .hero__art-copy .flourish { margin: clamp(7px,1.5vw,20px) auto 12px; }
 .hero__art-copy p { margin: 0 0 7px; font: 500 clamp(15px,1.6vw,23px)/1 var(--serif); }
@@ -252,8 +252,8 @@ svg { width: 18px; height: 18px; flex: none; }
   .site-header { min-height: 65px; }
   .brand__monogram { font-size: 31px; }
   .audio-button { font-size: 9px; }
-  .hero { gap: 34px; padding: 16px 12px 65px; }
-  .hero__art { width: 100%; padding: 5px; }
+  .hero { gap: 0; padding: 12px 8px 20px; }
+  .hero__art { width: min(100%, calc((100svh - 105px) * .7094)); padding: 5px; }
   .hero__art::after { inset: 10px; }
   .hero__art-copy { top: 33%; left: 5%; right: 5%; }
   .hero__art-copy h1 { font-size: clamp(39px, 10vw, 57px); margin: 12px 0 7px; }
