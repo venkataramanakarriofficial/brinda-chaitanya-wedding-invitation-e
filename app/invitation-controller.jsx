@@ -31,6 +31,7 @@ export default function InvitationController() {
     let autoScrollFrame;
     let autoScrollActive = false;
     let lastAutoScrollTime = 0;
+    let autoScrollPosition = 0;
     let observer;
 
     const toast = message => {
@@ -59,24 +60,32 @@ export default function InvitationController() {
       autoScrollActive = false;
       clearTimeout(autoScrollTimer);
       cancelAnimationFrame(autoScrollFrame);
+      autoScrollTimer = undefined;
+      autoScrollFrame = undefined;
       document.body.classList.remove('auto-scrolling');
+      document.documentElement.classList.remove('auto-scrolling');
     };
 
     const startAutoScroll = () => {
       if (reducedMotion) return;
       stopAutoScroll();
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.documentElement.classList.add('auto-scrolling');
+      window.scrollTo(0, 0);
       autoScrollTimer = window.setTimeout(() => {
+        autoScrollTimer = undefined;
         autoScrollActive = true;
         document.body.classList.add('auto-scrolling');
+        document.documentElement.classList.add('auto-scrolling');
         lastAutoScrollTime = performance.now();
+        autoScrollPosition = window.scrollY;
         const step = now => {
           if (!autoScrollActive) return;
           const maximum = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
           if (window.scrollY >= maximum - 2) { stopAutoScroll(); return; }
           const elapsed = Math.min(64, now - lastAutoScrollTime);
           lastAutoScrollTime = now;
-          window.scrollBy(0, elapsed * 0.04);
+          autoScrollPosition = Math.min(maximum, autoScrollPosition + elapsed * 0.04);
+          window.scrollTo(0, autoScrollPosition);
           autoScrollFrame = requestAnimationFrame(step);
         };
         autoScrollFrame = requestAnimationFrame(step);
@@ -109,6 +118,8 @@ export default function InvitationController() {
       const openButton = find('film-open');
       if (openButton) openButton.disabled = false;
       video.currentTime = 0;
+      video.defaultPlaybackRate = 1.15;
+      video.playbackRate = 1.15;
       video.load();
     };
 
@@ -116,6 +127,8 @@ export default function InvitationController() {
       if (filmClosed || film.classList.contains('film--opening') || film.classList.contains('film--playing')) return;
       const openButton = find('film-open');
       if (openButton) openButton.disabled = true;
+      audio.currentTime = 0;
+      startMusic();
       film.classList.add('film--opening');
       video.currentTime = 0;
       video.muted = false;
