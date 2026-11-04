@@ -150,7 +150,7 @@ svg { width: 18px; height: 18px; flex: none; }
 .event-card__date { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .event-card__date p, .event-card__date span { color: #a48669; font-size: 11px; font-weight: 700; letter-spacing: .28em; }
 .event-card__date p { margin: 0; }
-.event-card__date strong { display: block; margin: 0; font: 500 clamp(140px,16vw,250px)/.9 var(--serif); letter-spacing: -.07em; color: var(--pine); }
+.event-card__date strong { display: block; margin: 0; font: 400 clamp(140px,16vw,250px)/.9 Georgia, "Times New Roman", serif; letter-spacing: -.07em; color: var(--pine); }
 .event-card__line { height: 85%; background: #cfbdaa; }
 .event-card__info { position: relative; z-index: 1; }
 .event-card__eyebrow { margin: 0 0 18px; color: #b28e67; font-size: 9px; font-weight: 700; letter-spacing: .22em; }
@@ -184,10 +184,8 @@ svg { width: 18px; height: 18px; flex: none; }
 .venue__card h3 { margin: 25px 0 17px; font: 500 clamp(31px,3.3vw,45px)/1 var(--serif); }
 .venue__card > p:not(.handwritten) { margin: 0 0 28px; color: #817d70; font: 20px/1.43 var(--serif); }
 .venue__footnote { display: block; margin-top: 33px; color: #9d947e; font: italic 17px var(--serif); }
-.ending { position: relative; overflow: hidden; background: radial-gradient(ellipse at center, #fffcf8 20%, #f9ecec 100%); }
-.ending::before, .ending::after { content: ""; position: absolute; width: 31%; min-width: 240px; height: 90%; background: url('/assets/floral-arch-watercolor.webp') center / cover; opacity: .20; filter: saturate(.8); pointer-events: none; }
-.ending::before { left: -18%; top: 3%; transform: rotate(-8deg); }
-.ending::after { right: -18%; bottom: -10%; transform: rotate(8deg); }
+.ending { position: relative; overflow: hidden; background: radial-gradient(circle at 8% 10%, rgba(203,141,154,.18) 0, rgba(203,141,154,0) 30%), radial-gradient(circle at 92% 90%, rgba(151,166,138,.18) 0, rgba(151,166,138,0) 32%), linear-gradient(155deg, #fffdf9 0%, #fbf2f2 52%, #f5f3e9 100%); }
+.ending::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(169,143,95,.22); pointer-events: none; }
 .ending__inner { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
 .ending__flower { display: block; font-size: 40px; color: var(--rose); margin-bottom: 25px; }
 .ending h2 { margin: 25px 0 24px; font: 500 clamp(52px,6vw,88px)/.95 var(--serif); letter-spacing: -.045em; }
