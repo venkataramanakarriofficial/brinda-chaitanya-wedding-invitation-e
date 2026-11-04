@@ -9,6 +9,11 @@ const EVENT = {
   description: 'You are invited to celebrate with Brinda and Chaitanya. Wedding muhurtham at 10:14 PM IST.'
 };
 
+const SOUNDTRACK = {
+  opening: '/assets/ye-maya-chesave-manasaa-theme.mp3',
+  loop: '/assets/manasaa-continuation-50s-90s.mp3'
+};
+
 export default function InvitationController() {
   useEffect(() => {
     const find = id => document.getElementById(id);
@@ -32,6 +37,8 @@ export default function InvitationController() {
     let autoScrollActive = false;
     let lastAutoScrollTime = 0;
     let autoScrollPosition = 0;
+    let soundtrackPhase = 'opening';
+    let soundtrackSwitching = false;
     let observer;
 
     const toast = message => {
@@ -51,9 +58,43 @@ export default function InvitationController() {
       music.classList.toggle('is-playing', playing);
     };
     const startMusic = () => audio.play().then(setMusic).catch(() => { setMusic(); });
+
+    const resetSoundtrack = () => {
+      soundtrackPhase = 'opening';
+      soundtrackSwitching = false;
+      audio.loop = false;
+      if (!audio.currentSrc.endsWith(SOUNDTRACK.opening)) {
+        audio.pause();
+        audio.src = SOUNDTRACK.opening;
+        audio.load();
+      }
+      audio.currentTime = 0;
+    };
+
+    const startLoopSoundtrack = () => {
+      if (soundtrackPhase === 'loop' || soundtrackSwitching) return;
+      const shouldResume = !audio.paused;
+      soundtrackPhase = 'loop';
+      soundtrackSwitching = true;
+      audio.pause();
+      audio.loop = true;
+      audio.src = SOUNDTRACK.loop;
+      audio.load();
+      const beginLoop = () => {
+        audio.currentTime = 0;
+        soundtrackSwitching = false;
+        if (shouldResume) startMusic();
+      };
+      if (audio.readyState >= 1) beginLoop();
+      else audio.addEventListener('loadedmetadata', beginLoop, { once: true, signal: controller.signal });
+    };
+
     listen(music, 'click', () => { if (audio.paused) startMusic(); else audio.pause(); });
     listen(audio, 'play', setMusic);
     listen(audio, 'pause', setMusic);
+    listen(audio, 'timeupdate', () => {
+      if (soundtrackPhase === 'opening' && audio.currentTime >= 25) startLoopSoundtrack();
+    });
     listen(audio, 'error', () => { setMusic(); toast('Music is unavailable on this device.'); });
 
     const stopAutoScroll = () => {
@@ -117,6 +158,8 @@ export default function InvitationController() {
       document.body.classList.add('film-active');
       const openButton = find('film-open');
       if (openButton) openButton.disabled = false;
+      audio.pause();
+      resetSoundtrack();
       video.currentTime = 0;
       video.defaultPlaybackRate = 1.15;
       video.playbackRate = 1.15;
@@ -127,7 +170,7 @@ export default function InvitationController() {
       if (filmClosed || film.classList.contains('film--opening') || film.classList.contains('film--playing')) return;
       const openButton = find('film-open');
       if (openButton) openButton.disabled = true;
-      audio.currentTime = 0;
+      resetSoundtrack();
       startMusic();
       film.classList.add('film--opening');
       video.currentTime = 0;
