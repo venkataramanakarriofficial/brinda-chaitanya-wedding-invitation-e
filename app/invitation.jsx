@@ -16,12 +16,20 @@ const Flourish = () => <div className="flourish" aria-hidden="true"><span/><b>�
 
 export default function Invitation() {
   return <>
-    <a className="skip-link" href="#home" id="skip-opening">Skip the opening film</a>
-
     <div className="film" id="film" role="dialog" aria-modal="true" aria-label="Wedding invitation opening film">
-      <div className="film__top"><span className="film__eyebrow">AN INVITATION FROM OUR HEARTS</span><button type="button" className="film__skip" id="film-skip">Skip intro <Icon name="arrow" /></button></div>
-      <div className="film__portrait"><video id="film-video" autoPlay muted playsInline preload="metadata" poster="/assets/floral-mandap-watercolor.webp"><source src="/assets/floral-opening-film.mp4" type="video/mp4" /></video><span className="film__edge"/></div>
-      <div className="film__bottom"><span>BRINDA <i>&</i> CHAITANYA</span><div className="film__progress"><span id="film-progress"/></div><button type="button" className="film__enter" id="film-enter">Enter invitation <Icon name="arrow"/></button></div>
+      <div className="film__envelope-stage">
+        <button type="button" className="film__open" id="film-open" aria-label="Open the wedding invitation">
+          <span className="film__envelope" aria-hidden="true">
+            <span className="film__envelope-card"><span>B <i>&</i> C</span><small>WEDDING INVITATION</small></span>
+            <span className="film__envelope-flap"/>
+            <span className="film__envelope-pocket"/>
+            <span className="film__open-label">OPEN</span>
+          </span>
+        </button>
+      </div>
+      <div className="film__video-stage">
+        <video id="film-video" playsInline preload="auto" poster="/assets/floral-mandap-watercolor.webp" aria-label="Brinda and Chaitanya wedding opening film"><source src="/assets/floral-opening-film.mp4" type="video/mp4" /></video>
+      </div>
     </div>
 
     <audio id="wedding-audio" preload="none" loop><source src="/assets/jashn-e-bahaaraa-flute.mp3" type="audio/mpeg" /></audio>
@@ -45,7 +53,7 @@ export default function Invitation() {
         <section className="couple section-shell" id="couple" aria-labelledby="couple-title">
           <div className="section-heading reveal"><span className="section-number">01 / THE TWO HEARTS</span><p className="handwritten">A little note from us</p><h2 id="couple-title">A new chapter,<br/><em>written together.</em></h2><Flourish/><p className="section-heading__description">With the love of our families and the blessings of those closest to us, we begin our forever. Your presence will make our day complete.</p></div>
           <div className="couple__cards">
-            <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE BRIDE</p><h3>Brinda <span>Yellapu</span></h3><p className="person-card__degree">BHMS</p><span className="person-card__divider"/><p className="person-card__relationship">Loving daughter of</p><p className="person-card__parents">Yellapu Devendra Kumar <i>&</i><br/>Priya Darshini</p></article>
+            <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE BRIDE</p><h3>Brinda</h3><p className="person-card__degree">BHMS</p><span className="person-card__divider"/><p className="person-card__relationship">Loving daughter of</p><p className="person-card__parents">Yellapu Devendra Kumar <i>&</i><br/>Priya Darshini</p></article>
             <div className="couple__between reveal"><span className="couple__rule"/><b>&</b><span className="couple__rule"/></div>
             <article className="person-card reveal"><div className="person-card__leaf" aria-hidden="true">❀</div><p className="person-card__role">THE GROOM</p><h3>Chaitanya</h3><p className="person-card__degree">MBBS, MD</p><span className="person-card__divider"/><p className="person-card__relationship">Loving son of</p><p className="person-card__parents">Malla Murali <i>&</i><br/>Sujatha</p></article>
           </div>

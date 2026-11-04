@@ -23,7 +23,7 @@ export default function InvitationController() {
     const listen = (target, type, handler, options = {}) => target?.addEventListener(type, handler, { ...options, signal: controller.signal });
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let filmClosed = false;
-    let filmFallback;
+    let openingTimer;
     let toastTimer;
     let countdownTimer;
     let filmHideTimer;
@@ -54,7 +54,7 @@ export default function InvitationController() {
     const closeFilm = () => {
       if (filmClosed) return;
       filmClosed = true;
-      clearTimeout(filmFallback);
+      clearTimeout(openingTimer);
       video.pause();
       film.classList.add('film--closed');
       film.setAttribute('aria-hidden', 'true');
@@ -63,40 +63,47 @@ export default function InvitationController() {
     };
 
     const openFilm = () => {
-      clearTimeout(filmFallback);
+      clearTimeout(openingTimer);
       clearTimeout(filmHideTimer);
       filmClosed = false;
       film.hidden = false;
       film.setAttribute('aria-hidden', 'false');
-      film.classList.remove('film--closed');
+      film.classList.remove('film--closed', 'film--opening', 'film--playing');
       document.body.classList.add('film-active');
-      const progress = find('film-progress');
-      if (progress) progress.style.width = '0%';
+      const openButton = find('film-open');
+      if (openButton) openButton.disabled = false;
       video.currentTime = 0;
-      video.muted = true;
-      const result = video.play();
-      result?.catch(() => { find('film-enter')?.classList.add('film__enter--emphasis'); });
-      filmFallback = setTimeout(closeFilm, 12500);
+      video.load();
+      requestAnimationFrame(() => openButton?.focus({ preventScroll: true }));
     };
 
-    listen(find('film-skip'), 'click', closeFilm);
-    listen(find('film-enter'), 'click', closeFilm);
-    listen(find('skip-opening'), 'click', closeFilm);
+    const playFilm = () => {
+      if (filmClosed || film.classList.contains('film--opening') || film.classList.contains('film--playing')) return;
+      const openButton = find('film-open');
+      if (openButton) openButton.disabled = true;
+      film.classList.add('film--opening');
+      openingTimer = window.setTimeout(() => {
+        if (filmClosed) return;
+        film.classList.add('film--playing');
+        video.currentTime = 0;
+        video.muted = false;
+        const result = video.play();
+        result?.catch(() => {
+          video.muted = true;
+          video.play().catch(closeFilm);
+        });
+      }, reducedMotion ? 0 : 1150);
+    };
+
+    listen(find('film-open'), 'click', playFilm);
     listen(find('replay-opening'), 'click', () => { window.scrollTo({ top: 0, behavior: 'instant' }); openFilm(); });
     listen(video, 'ended', closeFilm);
     listen(video, 'error', closeFilm);
-    listen(video, 'timeupdate', () => {
-      if (video.duration && Number.isFinite(video.duration)) {
-        const progress = find('film-progress');
-        if (progress) progress.style.width = `${Math.min(100, video.currentTime / video.duration * 100)}%`;
-      }
-    });
     listen(document, 'keydown', event => { if (event.key === 'Escape' && !filmClosed) closeFilm(); });
 
     // Never make the soundtrack a prerequisite for entering the invitation.
     // Mobile browsers normally require a user gesture to start audio.
-    if (reducedMotion) closeFilm();
-    else openFilm();
+    openFilm();
 
     if ('IntersectionObserver' in window && !reducedMotion) {
       observer = new IntersectionObserver(entries => {
@@ -148,7 +155,7 @@ export default function InvitationController() {
     // its opening sequence only because the confirmed project muhurtham is 10:14 PM.
     return () => {
       controller.abort();
-      clearTimeout(filmFallback);
+      clearTimeout(openingTimer);
       clearTimeout(filmHideTimer);
       clearTimeout(toastTimer);
       clearInterval(countdownTimer);

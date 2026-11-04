@@ -28,25 +28,36 @@ svg { width: 18px; height: 18px; flex: none; }
 .skip-link { position: fixed; top: -100px; left: 18px; background: white; border-radius: 3px; padding: 12px 18px; z-index: 6001; font-size: 12px; }
 .skip-link:focus { top: 16px; }
 
-/* Opening film: the uploaded motion invitation is used without its incorrect 6pm ending. */
-.film { position: fixed; z-index: 6000; inset: 0; display: flex; flex-direction: column; align-items: center; background: radial-gradient(ellipse at 50% 50%, #f9f1e9 0%, #efe5de 74%, #e9d7d0 100%); transition: opacity .75s ease, visibility .75s ease; }
+/* Opening: a blush embossed envelope reveals the full-screen wedding film. */
+.film { position: fixed; z-index: 6000; inset: 0; overflow: hidden; background: radial-gradient(circle at 50% 42%, #fff 0%, #fff9f8 44%, #f6e8e9 100%); transition: opacity .75s ease, visibility .75s ease; }
 .film[hidden] { display: none; }
 .film--closed { opacity: 0; visibility: hidden; pointer-events: none; }
-.film__top { width: 100%; z-index: 2; height: 76px; flex: none; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(22px, 5vw, 76px); }
-.film__eyebrow { font-size: 10px; letter-spacing: .27em; color: var(--pine); font-weight: 600; }
-.film__skip { display: flex; align-items: center; gap: 9px; border: 0; color: var(--pine); background: transparent; text-transform: uppercase; font-size: 10px; letter-spacing: .16em; padding: 14px 0; }
-.film__skip svg { width: 16px; }
-.film__portrait { display: grid; flex: 1; min-height: 0; position: relative; place-items: center; width: 100%; }
-.film__portrait video { object-fit: contain; width: auto; height: 100%; max-width: min(88vw, 700px); border: 1px solid rgba(185, 154, 113, .2); box-shadow: 0 16px 52px rgba(78, 72, 52, .12); }
-.film__edge { position: absolute; pointer-events: none; border: 1px solid rgba(183,146,96,.27); inset: 10px 20px; }
-.film__bottom { width: min(100%, 1200px); padding: 18px clamp(22px, 5vw, 60px) max(20px, env(safe-area-inset-bottom)); display: flex; justify-content: space-between; align-items: center; gap: 23px; z-index: 2; }
-.film__bottom > span { white-space: nowrap; font: 600 11px var(--serif); letter-spacing: .12em; }
-.film__bottom > span i { font-family: var(--script); font-size: 19px; color: var(--rose); font-weight: 400; }
-.film__progress { flex: 1; height: 2px; max-width: 360px; overflow: hidden; background: #d6d4c9; }
-.film__progress span { display: block; height: 100%; width: 0; background: var(--pine); transition: width .13s linear; }
-.film__enter { background: var(--pine); color: white; border: 1px solid var(--pine); padding: 12px 18px; display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
-.film__enter:hover, .film__enter--emphasis { background: var(--pine-deep); }
-.film__enter svg { width: 15px; }
+.film__envelope-stage, .film__video-stage { position: absolute; inset: 0; display: grid; place-items: center; }
+.film__envelope-stage { z-index: 2; padding: 24px; transition: opacity .45s ease, transform .65s ease; }
+.film__open { width: min(84vw, 470px); border: 0; padding: 0; color: inherit; background: transparent; perspective: 1200px; }
+.film__open:disabled { cursor: default; }
+.film__open:focus-visible { outline: 2px solid var(--rose); outline-offset: 14px; }
+.film__envelope { position: relative; display: block; width: 100%; aspect-ratio: 1.5; border: 1px solid rgba(180, 119, 135, .28); border-radius: 3px; background: linear-gradient(145deg, #fffdfc, #faeef0); box-shadow: 0 28px 70px rgba(112, 74, 82, .18), inset 0 0 34px rgba(255,255,255,.9); transform-style: preserve-3d; }
+.film__envelope::before, .film__envelope::after { position: absolute; z-index: 6; color: rgba(255,255,255,.68); font: 400 clamp(76px, 20vw, 122px)/1 var(--serif); text-shadow: -1px -1px 1px rgba(255,255,255,.9), 1px 2px 3px rgba(174,112,128,.18); pointer-events: none; }
+.film__envelope::before { content: "❀"; left: 3%; bottom: 1%; transform: rotate(-18deg); }
+.film__envelope::after { content: "❀"; right: 3%; top: 1%; transform: rotate(18deg) scale(.82); }
+.film__envelope-card { position: absolute; z-index: 2; left: 6%; right: 6%; bottom: 6%; height: 86%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(203,141,154,.25); background: #fffdfb; color: var(--pine); box-shadow: 0 8px 22px rgba(92,66,71,.10); transition: transform .9s cubic-bezier(.22,.76,.25,1) .18s; }
+.film__envelope-card span { font: 500 clamp(39px, 10vw, 61px)/1 var(--serif); letter-spacing: -.08em; }
+.film__envelope-card i { color: var(--rose); font: 400 .9em var(--script); }
+.film__envelope-card small { color: #a67e88; font: 600 clamp(8px, 2vw, 11px)/1 var(--sans); letter-spacing: .25em; }
+.film__envelope-flap { position: absolute; z-index: 5; inset: 0 0 42%; clip-path: polygon(0 0, 100% 0, 50% 100%); background: linear-gradient(155deg, #fff 0%, #f7e6e9 100%); border-top: 1px solid rgba(180,119,135,.22); transform-origin: 50% 0; backface-visibility: hidden; transition: transform .85s cubic-bezier(.4,0,.2,1); }
+.film__envelope-pocket { position: absolute; z-index: 4; inset: 0; clip-path: polygon(0 27%, 50% 69%, 100% 27%, 100% 100%, 0 100%); background: linear-gradient(145deg, #fdf7f7 0%, #f3dfe3 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,.8); }
+.film__open-label { position: absolute; z-index: 8; left: 50%; top: 52%; display: grid; place-items: center; width: clamp(67px, 18vw, 88px); aspect-ratio: 1; transform: translate(-50%,-50%); border: 5px double rgba(255,255,255,.72); border-radius: 48% 52% 46% 54%; color: white; background: radial-gradient(circle at 36% 30%, #eab8c2, #ca8292 72%); box-shadow: 0 5px 12px rgba(111,67,77,.22), inset 0 0 0 2px rgba(158,89,105,.22); font: 700 clamp(9px,2.4vw,12px)/1 var(--sans); letter-spacing: .19em; text-indent: .19em; transition: opacity .3s ease, transform .4s ease; }
+.film__video-stage { z-index: 1; opacity: 0; background: #fff8f7; transition: opacity .45s ease; }
+.film__video-stage video { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center; }
+.film--opening .film__envelope-flap { transform: rotateX(180deg); }
+.film--opening .film__envelope-card { transform: translateY(-60%); }
+.film--opening .film__open-label { opacity: 0; transform: translate(-50%,-50%) scale(.72); }
+.film--playing .film__envelope-stage { opacity: 0; transform: scale(1.04); pointer-events: none; }
+.film--playing .film__video-stage { z-index: 3; opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .film__envelope-flap, .film__envelope-card, .film__open-label, .film__envelope-stage, .film__video-stage { transition-duration: .01ms; }
+}
 
 .site { background: var(--paper); }
 .site-header { position: relative; z-index: 100; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 82px; padding: 0 clamp(24px, 5.8vw, 100px); background: rgba(250, 247, 242, .96); border-bottom: 1px solid var(--line); }
@@ -88,9 +99,9 @@ svg { width: 18px; height: 18px; flex: none; }
 .hero__art::after { content: ""; position: absolute; inset: 16px; border: 1px solid rgba(160,132,78,.20); pointer-events: none; }
 .hero__art-copy { position: absolute; z-index: 2; left: 9%; right: 9%; top: 33%; text-align: center; color: var(--pine-deep); }
 .hero__invite-label { font-size: clamp(7px,.72vw,10px); letter-spacing: .20em; font-weight: 600; color: #8c8062; }
-.hero__art-copy h1 { margin: clamp(13px,2vw,23px) 0 clamp(5px,1vw,14px); display: grid; justify-items: center; font: 500 clamp(37px, 4.4vw, 69px)/.90 var(--serif); letter-spacing: -.05em; }
+.hero__art-copy h1 { margin: clamp(13px,2vw,23px) 0 clamp(5px,1vw,14px); display: grid; justify-items: center; row-gap: clamp(6px,.8vw,12px); font: 500 clamp(37px, 4.4vw, 69px)/.84 var(--serif); letter-spacing: -.05em; }
 .hero__art-copy h1 > span:not(.hero__and) { display: block; white-space: nowrap; font: inherit; letter-spacing: inherit; }
-.hero__art-copy .hero__and { display: block; margin: 1px 0 6px; font: 400 .68em/.95 var(--script); color: #ae8959; }
+.hero__art-copy .hero__and { display: grid; place-items: center; width: 100%; height: .52em; margin: 0; font: 400 .72em/1 var(--script); color: #ae8959; }
 .hero__art-copy .flourish { margin: clamp(7px,1.5vw,20px) auto 12px; }
 .hero__art-copy p { margin: 0 0 7px; font: 500 clamp(15px,1.6vw,23px)/1 var(--serif); }
 .hero__art-copy small { color: #80795f; font-size: clamp(7px,.75vw,10px); letter-spacing: .10em; }
@@ -240,15 +251,8 @@ svg { width: 18px; height: 18px; flex: none; }
   .event-card__date strong { font-size: 160px; }
 }
 @media (max-width: 520px) {
-  .film__top { height: 61px; padding: 0 18px; }
-  .film__eyebrow { font-size: 8px; letter-spacing: .1em; }
-  .film__skip { font-size: 9px; }
-  .film__portrait { padding: 0 10px; }
-  .film__portrait video { max-width: 100%; }
-  .film__edge { inset: 0 8px; }
-  .film__bottom { padding: 13px 18px max(17px, env(safe-area-inset-bottom)); gap: 13px; }
-  .film__bottom > span { display: none; }
-  .film__enter { padding: 10px 11px; font-size: 9px; }
+  .film__envelope-stage { padding: 18px; }
+  .film__open { width: min(90vw, 470px); }
   .site-header { min-height: 65px; }
   .brand__monogram { font-size: 31px; }
   .audio-button { font-size: 9px; }
@@ -256,8 +260,8 @@ svg { width: 18px; height: 18px; flex: none; }
   .hero__art { width: 100%; max-width: none; margin: 0; padding: 0; box-shadow: none; }
   .hero__art::after { inset: 8px; }
   .hero__art-copy { top: 33%; left: 5%; right: 5%; }
-  .hero__art-copy h1 { font-size: clamp(39px, 10vw, 57px); margin: 12px 0 7px; }
-  .hero__art-copy .hero__and { margin: -1px 0 4px; }
+  .hero__art-copy h1 { font-size: clamp(39px, 10vw, 57px); margin: 12px 0 7px; row-gap: 7px; }
+  .hero__art-copy .hero__and { height: .55em; margin: 0; }
   .hero__art-copy .flourish { margin: 6px auto 7px; width: 110px; }
   .hero__art-copy .flourish b { font-size: 14px; }
   .hero__art-copy p { font-size: clamp(13px,3.6vw,18px); margin-bottom: 4px; }
