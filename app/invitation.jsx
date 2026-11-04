@@ -37,7 +37,7 @@ export default function Invitation() {
         <section className="hero" id="home" aria-labelledby="hero-title">
           <div className="hero__art reveal" aria-label="Floral watercolor wedding invitation for Brinda and Chaitanya">
             <img src="/assets/floral-arch-watercolor.webp" alt="Hand painted ivory arch, blush pink roses, sage greenery and gold detailing" fetchPriority="high"/>
-            <div className="hero__art-copy"><span className="hero__invite-label">JOYFULLY INVITE YOU TO CELEBRATE</span><h1 id="hero-title"><span>Brinda</span><span className="hero__and">&</span><span>Chaitanya</span></h1><Flourish/><p>Sunday, 15 November 2026</p><small>Auspicious Muhurtham · 10:14 PM</small></div>
+            <div className="hero__art-copy"><span className="hero__invite-label">JOYFULLY INVITE YOU TO CELEBRATE</span><h1 id="hero-title"><span>Brinda Yellapu</span><span className="hero__and">&</span><span>Chaitanya</span></h1><Flourish/><p>Sunday, 15 November 2026</p><small>Auspicious Muhurtham · 10:14 PM</small></div>
             <span className="hero__art-corner">A DAY TO REMEMBER • A LOVE TO CELEBRATE</span>
           </div>
         </section>

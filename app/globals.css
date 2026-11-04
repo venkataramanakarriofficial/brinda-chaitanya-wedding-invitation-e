@@ -88,9 +88,9 @@ svg { width: 18px; height: 18px; flex: none; }
 .hero__art::after { content: ""; position: absolute; inset: 16px; border: 1px solid rgba(160,132,78,.20); pointer-events: none; }
 .hero__art-copy { position: absolute; z-index: 2; left: 9%; right: 9%; top: 33%; text-align: center; color: var(--pine-deep); }
 .hero__invite-label { font-size: clamp(7px,.72vw,10px); letter-spacing: .20em; font-weight: 600; color: #8c8062; }
-.hero__art-copy h1 { margin: clamp(13px,2vw,23px) 0 clamp(5px,1vw,14px); font: 500 clamp(37px, 4.4vw, 69px)/.90 var(--serif); letter-spacing: -.05em; }
+.hero__art-copy h1 { margin: clamp(13px,2vw,23px) 0 clamp(5px,1vw,14px); display: grid; justify-items: center; font: 500 clamp(37px, 4.4vw, 69px)/.90 var(--serif); letter-spacing: -.05em; }
 .hero__art-copy h1 > span:not(.hero__and) { display: block; white-space: nowrap; font: inherit; letter-spacing: inherit; }
-.hero__art-copy .hero__and { display: flex; justify-content: center; width: 100%; margin: 1px 0 6px; font: 400 .68em/.95 var(--script); color: #ae8959; transform: translateX(-.07em); }
+.hero__art-copy .hero__and { display: block; margin: 1px 0 6px; font: 400 .68em/.95 var(--script); color: #ae8959; }
 .hero__art-copy .flourish { margin: clamp(7px,1.5vw,20px) auto 12px; }
 .hero__art-copy p { margin: 0 0 7px; font: 500 clamp(15px,1.6vw,23px)/1 var(--serif); }
 .hero__art-copy small { color: #80795f; font-size: clamp(7px,.75vw,10px); letter-spacing: .10em; }
