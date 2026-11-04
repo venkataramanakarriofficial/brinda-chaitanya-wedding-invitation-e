@@ -42,8 +42,6 @@ export default function Invitation() {
           </div>
         </section>
 
-        <div className="ribbon" aria-hidden="true"><span>✦</span> AN UNFORGETTABLE BEGINNING <span>✦</span> CELEBRATING LOVE & FAMILY <span>✦</span> AN UNFORGETTABLE BEGINNING <span>✦</span></div>
-
         <section className="couple section-shell" id="couple" aria-labelledby="couple-title">
           <div className="section-heading reveal"><span className="section-number">01 / THE TWO HEARTS</span><p className="handwritten">A little note from us</p><h2 id="couple-title">A new chapter,<br/><em>written together.</em></h2><Flourish/><p className="section-heading__description">With the love of our families and the blessings of those closest to us, we begin our forever. Your presence will make our day complete.</p></div>
           <div className="couple__cards">

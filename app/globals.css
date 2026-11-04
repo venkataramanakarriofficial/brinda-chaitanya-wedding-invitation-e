@@ -102,8 +102,6 @@ svg { width: 18px; height: 18px; flex: none; }
 .hero__scroll svg { width: 14px; height: 14px; animation: float 2s ease-in-out infinite; }
 @keyframes float { 50% { transform: translateY(5px); } }
 
-.ribbon { min-height: 53px; padding: 12px 20px; background: #e9e6da; color: #7b8c70; display: flex; align-items: center; justify-content: space-around; gap: 28px; overflow: hidden; white-space: nowrap; font-size: 9px; font-weight: 700; letter-spacing: .23em; }
-.ribbon span { color: var(--rose); font-size: 18px; }
 .section-shell { padding: clamp(80px, 9vw, 140px) clamp(22px, 7vw, 115px); }
 .section-heading { max-width: 860px; margin: 0 auto 61px; text-align: center; }
 .section-number { font-size: 10px; font-weight: 700; line-height: 1.6; letter-spacing: .25em; color: #a98b64; }
@@ -145,12 +143,12 @@ svg { width: 18px; height: 18px; flex: none; }
 
 .celebration { background: #faf7f0; }
 .celebration .section-heading { margin-bottom: 50px; }
-.event-card { max-width: 1050px; margin: 0 auto; padding: clamp(32px,5vw,70px); display: grid; grid-template-columns: .8fr 1px 1.2fr; gap: clamp(30px, 5vw, 75px); align-items: center; background: #f1ede5; border: 1px solid #e3d5c3; position: relative; }
+.event-card { max-width: 1050px; margin: 0 auto; padding: clamp(32px,5vw,70px); display: grid; grid-template-columns: .8fr 1px 1.2fr; gap: clamp(30px, 5vw, 75px); align-items: center; background: #f1ede5; border: 1px solid #e3d5c3; position: relative; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
 .event-card::before { content: ""; position: absolute; pointer-events: none; inset: 10px; border: 1px solid rgba(169,145,113,.18); }
 .event-card__date { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
 .event-card__date p, .event-card__date span { color: #a48669; font-size: 11px; font-weight: 700; letter-spacing: .28em; }
 .event-card__date p { margin: 0; }
-.event-card__date strong { display: block; margin: 0; font: 400 clamp(140px,16vw,250px)/.9 Georgia, "Times New Roman", serif; letter-spacing: -.07em; color: var(--pine); }
+.event-card__date strong { display: block; margin: 0; font: 500 clamp(140px,16vw,250px)/.9 var(--serif); font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; letter-spacing: -.07em; color: var(--pine); }
 .event-card__line { height: 85%; background: #cfbdaa; }
 .event-card__info { position: relative; z-index: 1; }
 .event-card__eyebrow { margin: 0 0 18px; color: #b28e67; font-size: 9px; font-weight: 700; letter-spacing: .22em; }
